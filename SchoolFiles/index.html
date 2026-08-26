@@ -9,6 +9,14 @@
 
 <body>
 
+    <!-- Background Video -->
+    <video id="backgroundVideo" autoplay loop playsinline>
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <!-- Video Play/Sound Button -->
+    <button id="videoPlayBtn">🔊 Play Sound</button>
+
     <div class="container">
 
         <h1>📚 Srideep School Files</h1>
@@ -25,26 +33,45 @@
             <p id="message"></p>
         </div>
 
+        <div id="schoolFilesSection">
+            <h2>School Files</h2>
+
+            <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png">
+
+            <button id="uploadBtn">Upload File</button>
+
+            <p id="uploadMessage"></p>
+
+            <h3>Your Files</h3>
+
+            <button id="logoutBtn">Logout</button>
+            <button id="refreshBtn">Refresh Files</button>
+
+            <div id="fileList"></div>
+        </div>
+
     </div>
-<div id="schoolFilesSection">
-<h2>School Files</h2>
 
-<input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
 
-<button id="uploadBtn">Upload File</button>
+    <script>
+        const backgroundVideo = document.getElementById("backgroundVideo");
+        const videoPlayBtn = document.getElementById("videoPlayBtn");
 
-<p id="uploadMessage"></p>
-<div id="schoolFilesSection">
-<h3>Your Files</h3>
-<button id="logoutBtn">Logout</button>
+        videoPlayBtn.addEventListener("click", async function () {
+            try {
+                await backgroundVideo.play();
+                videoPlayBtn.style.display = "none";
+            } catch (error) {
+                console.log("Video could not play:", error);
+            }
+        });
 
-<button id="refreshBtn">Refresh Files</button>
-
-<div id="fileList"></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+        backgroundVideo.addEventListener("playing", function () {
+            videoPlayBtn.style.display = "none";
+        });
+    </script>
 
 </body>
 </html>
